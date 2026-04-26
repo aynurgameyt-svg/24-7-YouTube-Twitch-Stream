@@ -2,11 +2,6 @@ ffmpeg -stream_loop -1 -re -i *video* -stream_loop -1 -re -i (replace this with 
 #!/bin/bash
 while true
 do
-  # Senin 2 saatlik işlenmiş videonun linki
-  URL="https://drive.google.com/uc?export=download&id=1lflnUIx_BJSdQKS73gaoUi5oO0nmrMH-"
-  
-  ffmpeg -re -i "$URL" -c:v libx264 -preset veryfast -b:v 3000k -maxrate 3000k -bufsize 6000k -pix_fmt yuv420p -g 50 -c:a aac -b:a 128k -f flv "rtmp://a.rtmp.youtube.com/live2/$STREAM_KEY"
-  
-  echo "Yayın bitti, tekrar başlatılıyor..."
+  ffmpeg -re -i "https://drive.google.com/uc?export=download&id=1QifIDUL08mqc6RvrYvs4jPjNeoaMmKYy" -c:v libx264 -preset veryfast -b:v 2500k -maxrate 2500k -bufsize 5000k -pix_fmt yuv420p -g 50 -c:a aac -b:a 128k -f flv "rtmp://a.rtmp.youtube.com/live2/$STREAM_KEY"
   sleep 5
 done
