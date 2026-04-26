@@ -1,0 +1,16 @@
+name: 24-7 Stream
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Run stream
+        env:
+          STREAM_KEY: ${{ secrets.STREAM_KEY }}
+        run: bash live.sh
+
