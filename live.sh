@@ -2,6 +2,13 @@ ffmpeg -stream_loop -1 -re -i *video* -stream_loop -1 -re -i (replace this with 
 #!/bin/bash
 while true
 do
-  ffmpeg -re -i "https://drive.google.com/uc?export=download&id=1QifIDUL08mqc6RvrYvs4jPjNeoaMmKYy" -c:v libx264 -preset veryfast -b:v 2500k -maxrate 2500k -bufsize 5000k -pix_fmt yuv420p -g 50 -c:a aac -b:a 128k -f flv "rtmp://a.rtmp.youtube.com/live2/$STREAM_KEY"
+  # Video indirme
+  wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1lflnUIx_BJSdQKS73gaoUi5oO0nmrMH-' -O video.mp4
+  
+  # Yayına basma
+  ffmpeg -re -i video.mp4 -c:v libx264 -preset veryfast -b:v 2500k -maxrate 2500k -bufsize 5000k -pix_fmt yuv420p -g 50 -c:a aac -b:a 128k -f flv "rtmp://a.rtmp.youtube.com/live2/$STREAM_KEY"
+  
+  # Dosyayı sil ve baştan başla
+  rm video.mp4
   sleep 5
 done
